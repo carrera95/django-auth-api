@@ -14,7 +14,7 @@ def login(request):
     print(request.data)
     user = get_object_or_404(User, username=request.data['username'])
 
-    if not user.check_password( request.data['password']):
+    if not user.check_password(request.data['password']):
         return Response({
             "error": "Invalid Password",},
             status = status.HTTP_400_BAD_REQUEST
@@ -28,11 +28,7 @@ def login(request):
         },
         status=status.HTTP_200_OK
     )
-#{
-#  "email": "edgar@edgar.com",
-#  "username": "edgar123",
-#  "password": "admin"
-#}
+
 @api_view(['POST'])
 def register(request):
     serializer = UserSerializer(data=request.data)
@@ -51,7 +47,7 @@ def register(request):
             status=status.HTTP_201_CREATED 
         )
     return Response(
-        serializer.errors, 
+        serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
 
